@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5º Encontro de Formadores - Fortalecendo Saberes 2026</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            scroll-behavior: smooth; 
+        }
+
+        :root {
+            --brand-yellow: #ffcb29;
+            --brand-teal: #58bbb6;
+            --brand-purple: #80509a;
+            --brand-pink: #ee549a;
+        }
+
+        .bg-brand-yellow { background-color: var(--brand-yellow); }
+        .text-brand-yellow { color: var(--brand-yellow); }
+        .bg-brand-teal { background-color: var(--brand-teal); }
+        .text-brand-teal { color: var(--brand-teal); }
+        .bg-brand-purple { background-color: var(--brand-purple); }
+        .text-brand-purple { color: var(--brand-purple); }
+        .bg-brand-pink { background-color: var(--brand-pink); }
+        .text-brand-pink { color: var(--brand-pink); }
+
+        .section-gradient-purple {
+            background: linear-gradient(135deg, #80509a 0%, #6a3d82 100%);
+        }
+
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .countdown-box {
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 1rem;
+            padding: 1rem;
+            min-width: 80px;
+        }
+
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .mobile-menu-open {
+            transform: translateX(0) !important;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+
+        .modal-active {
+            display: flex !important;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-gray-800 overflow-x-hidden">
+
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center gap-3">
+                    <div class="bg-brand-teal p-2 rounded-xl">
+                        <i data-lucide="graduation-cap" class="text-white w-6 h-6"></i>
+                    </div>
+                    <span class="font-black text-brand-purple text-xl tracking-tighter uppercase hidden sm:block text-brand-purple">Fortalecendo Saberes</span>
+                </div>
+                
+                <div class="hidden md:flex space-x-6">
+                    <a href="#inicio" class="text-gray-500 font-semibold hover:text-brand-purple transition-colors uppercase text-sm">Início</a>
+                    <a href="#guia" class="text-gray-500 font-semibold hover:text-brand-purple transition-colors uppercase text-sm">Guia</a>
+                    <a href="#ensalamento" class="text-gray-500 font-semibold hover:text-brand-purple transition-colors uppercase text-sm">Ensalamento</a>
+                    <a href="#local" class="text-gray-500 font-semibold hover:text-brand-purple transition-colors uppercase text-sm">Local</a>
+                    <a href="#cronograma" class="text-gray-500 font-semibold hover:text-brand-purple transition-colors uppercase text-sm">Cronograma</a>
+                    <a href="#logistica" class="text-gray-500 font-semibold hover:text-brand-purple transition-colors uppercase text-sm">Logística</a>
+                    <a href="#fotos" class="text-gray-500 font-semibold hover:text-brand-purple transition-colors uppercase text-sm">Fotos</a>
+                </div>
+
+                <button id="menu-toggle" class="md:hidden p-2 text-brand-purple">
+                    <i data-lucide="menu" class="w-8 h-8"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="menu-overlay" class="fixed inset-0 bg-black/50 z-[60] hidden opacity-0 transition-opacity duration-300"></div>
+    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-72 bg-white z-[70] shadow-2xl p-8 flex flex-col gap-6 translate-x-full text-gray-800">
+        <div class="flex justify-between items-center mb-4">
+            <span class="font-black text-brand-purple text-lg uppercase">Menu</span>
+            <button id="menu-close" class="text-gray-500"><i data-lucide="x" class="w-8 h-8"></i></button>
+        </div>
+        <a href="#inicio" class="mobile-link text-lg font-bold text-gray-700 hover:text-brand-purple uppercase">Início</a>
+        <a href="#guia" class="mobile-link text-lg font-bold text-gray-700 hover:text-brand-purple uppercase">Guia</a>
+        <a href="#ensalamento" class="mobile-link text-lg font-bold text-gray-700 hover:text-brand-purple uppercase">Ensalamento</a>
+        <a href="#local" class="mobile-link text-lg font-bold text-gray-700 hover:text-brand-purple uppercase">Local</a>
+        <a href="#cronograma" class="mobile-link text-lg font-bold text-gray-700 hover:text-brand-purple uppercase">Cronograma</a>
+        <a href="#logistica" class="mobile-link text-lg font-bold text-gray-700 hover:text-brand-purple uppercase">Logística</a>
+        <a href="#fotos" class="mobile-link text-lg font-bold text-gray-700 hover:text-brand-purple uppercase">Fotos</a>
+    </div>
+
+    <header id="inicio" class="relative section-gradient-purple text-white py-24 px-4 overflow-hidden text-center text-white">
+        <div class="absolute top-0 left-0 w-64 h-64 bg-brand-pink opacity-20 blur-3xl -ml-32 -mt-32"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-brand-teal opacity-20 blur-3xl -mr-48 -mb-48"></div>
+        
+        <div class="max-w-5xl mx-auto relative z-10">
+            <div class="flex flex-wrap justify-center gap-3 mb-8">
+                <div class="hero-badge px-6 py-2 rounded-full flex items-center gap-2">
+                    <i data-lucide="calendar" class="w-4 h-4 text-brand-yellow"></i>
+                    <span class="text-sm font-bold uppercase tracking-wider">12 a 14 de maio de 2026</span>
+                </div>
+                <div class="hero-badge px-6 py-2 rounded-full flex items-center gap-2">
+                    <i data-lucide="map-pin" class="w-4 h-4 text-brand-yellow"></i>
+                    <span class="text-sm font-bold uppercase tracking-wider">Foz do Iguaçu - PR</span>
+                </div>
+            </div>
+
+            <p class="uppercase tracking-[0.2em] text-brand-yellow font-black mb-4 text-xs md:text-sm">Secretaria da Educação do Paraná</p>
+            <h1 class="text-4xl md:text-7xl font-black mb-4 leading-[1.1] tracking-tight">5º Encontro de Formadores</h1>
+            <p class="text-xl md:text-3xl font-medium mb-12 italic opacity-90">Fortalecendo Saberes</p>
+            
+            <div class="flex justify-center gap-3 md:gap-6 mb-12 text-white">
+                <div class="countdown-box">
+                    <span id="days" class="block text-3xl md:text-5xl font-black text-brand-yellow">00</span>
+                    <span class="text-[10px] uppercase font-bold tracking-widest opacity-60">Dias</span>
+                </div>
+                <div class="countdown-box">
+                    <span id="hours" class="block text-3xl md:text-5xl font-black text-white">00</span>
+                    <span class="text-[10px] uppercase font-bold tracking-widest opacity-60">Horas</span>
+                </div>
+                <div class="countdown-box">
+                    <span id="minutes" class="block text-3xl md:text-5xl font-black text-white">00</span>
+                    <span class="text-[10px] uppercase font-bold tracking-widest opacity-60">Minutos</span>
+                </div>
+                <div class="countdown-box">
+                    <span id="seconds" class="block text-3xl md:text-5xl font-black text-white">00</span>
+                    <span class="text-[10px] uppercase font-bold tracking-widest opacity-60">Segundos</span>
+                </div>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#" target="_blank" class="inline-flex items-center gap-3 bg-brand-teal text-white font-black px-8 py-5 rounded-2xl shadow-2xl hover:scale-105 transition-all transform uppercase tracking-tighter">
+                    <i data-lucide="file-text" class="w-6 h-6"></i> Guia do Participante
+                </a>
+                <a href="#" target="_blank" class="inline-flex items-center gap-3 bg-brand-yellow text-brand-purple font-black px-8 py-5 rounded-2xl shadow-2xl hover:scale-105 transition-all transform uppercase tracking-tighter">
+                    <i data-lucide="camera" class="w-6 h-6"></i> Álbum de Fotos
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-16 space-y-24 text-gray-800">
+        
+        <section id="guia" class="scroll-mt-32">
+            <div class="bg-white p-10 md:p-16 rounded-[3rem] shadow-xl border border-gray-100 flex flex-col md:flex-row items-center gap-10">
+                <div class="bg-brand-teal/10 p-8 rounded-[2.5rem]">
+                    <i data-lucide="book-open" class="w-20 h-20 text-brand-teal"></i>
+                </div>
+                <div class="flex-1 text-center md:text-left space-y-4">
+                    <h2 class="text-4xl font-black text-gray-900 tracking-tight text-brand-purple uppercase">Guia do Participante</h2>
+                    <p class="text-lg text-gray-600 font-medium leading-relaxed">
+                        Preparamos um guia completo com todas as orientações, horários, contatos e informações essenciais para que você aproveite ao máximo o nosso 5º Encontro.
+                    </p>
+                    <a href="#" class="inline-flex items-center gap-2 text-brand-teal font-black text-lg hover:underline transition-all uppercase">
+                        Clique aqui para ler o guia <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="ensalamento" class="scroll-mt-32 space-y-12">
+            <div class="text-center space-y-4">
+                <h2 class="text-5xl font-black text-gray-900 tracking-tight uppercase text-brand-purple">Ensalamento</h2>
+                <div class="h-2 w-24 bg-brand-teal mx-auto rounded-full"></div>
+                <p class="text-gray-600 font-medium text-lg italic">Localize sua sala e confira os temas e docentes responsáveis.</p>
+            </div>
+
+            <div id="grade-salas" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            </div>
+        </section>
+
+        <div id="modal-participantes" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/70 backdrop-blur-md">
+            <div class="bg-white w-full max-w-2xl rounded-[3rem] shadow-2xl overflow-hidden flex flex-col max-h-[85vh]">
+                <div id="modal-header" class="bg-brand-purple p-8 text-white flex justify-between items-center">
+                    <div>
+                        <h4 id="modal-titulo" class="text-2xl font-black uppercase tracking-tight">SALA 01</h4>
+                        <p class="text-brand-yellow font-bold text-sm uppercase tracking-widest">Lista Oficial de Participantes</p>
+                    </div>
+                    <button onclick="fecharModal()" class="bg-white/20 hover:bg-white/40 p-3 rounded-full transition-all">
+                        <i data-lucide="x" class="w-6 h-6"></i>
+                    </button>
+                </div>
+                <div class="p-8 overflow-y-auto flex-1">
+                    <div id="lista-nomes" class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700 font-medium uppercase text-sm">
+                    </div>
+                </div>
+                <div class="p-6 bg-gray-50 border-t border-gray-100 text-center">
+                    <button onclick="fecharModal()" class="bg-brand-purple text-white px-12 py-4 rounded-xl font-black uppercase tracking-widest text-sm shadow-lg">FECHAR</button>
+                </div>
+            </div>
+        </div>
+
+        <section id="publico" class="grid md:grid-cols-2 gap-12 items-start scroll-mt-32 text-gray-800">
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-purple-50 rounded-full text-brand-purple">
+                    <div class="w-2 h-2 rounded-full bg-brand-purple"></div>
+                    <span class="text-xs font-bold uppercase tracking-widest">Participantes</span>
+                </div>
+                <h2 class="text-4xl font-black text-gray-900 leading-tight uppercase">Público</h2>
+                <div class="bg-white p-8 rounded-[2rem] shadow-xl border border-gray-100">
+                    <ul class="space-y-6">
+                        <li class="flex items-start gap-4">
+                            <div class="bg-teal-50 p-2 rounded-lg text-brand-teal"><i data-lucide="user-check" class="w-5 h-5"></i></div>
+                            <span class="text-gray-700 font-semibold leading-tight pt-1 uppercase">Formadores, Tutores, Coordenadores NRE</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="bg-teal-50 p-2 rounded-lg text-brand-teal"><i data-lucide="gem" class="w-5 h-5"></i></div>
+                            <span class="text-gray-700 font-semibold leading-tight pt-1 uppercase">Professores Diamante</span>
+                        </li>
+                        <li class="flex items-start gap-4">
+                            <div class="bg-teal-50 p-2 rounded-lg text-brand-teal"><i data-lucide="shield-check" class="w-5 h-5"></i></div>
+                            <span class="text-gray-700 font-semibold leading-tight pt-1 uppercase">Equipe SEED</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="space-y-8">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-pink-50 rounded-full text-brand-pink">
+                    <div class="w-2 h-2 rounded-full bg-brand-pink"></div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-pink">Colaboração</span>
+                </div>
+                <h2 class="text-4xl font-black text-gray-900 leading-tight uppercase">Parcerias</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-50 flex items-center justify-center text-center font-bold text-brand-teal uppercase">Instituto Canoa</div>
+                    <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-50 flex items-center justify-center text-center font-bold text-brand-pink uppercase">Fundação Itaú</div>
+                    <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-50 flex items-center justify-center text-center font-bold text-brand-purple uppercase">Safernet Brasil</div>
+                    <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-50 flex items-center justify-center text-center font-bold text-yellow-600 uppercase">Start by Alura</div>
+                </div>
+                <div class="bg-brand-pink text-white p-6 rounded-2xl shadow-lg">
+                    <h4 class="font-bold mb-2 flex items-center gap-2 uppercase text-white"><i data-lucide="target" class="w-5 h-5"></i> Metodologia</h4>
+                    <p class="text-sm opacity-95 leading-relaxed italic text-white">Construção coletiva e Gamificação para engajamento educacional.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="local" class="scroll-mt-32 space-y-12">
+            <div class="text-center space-y-4">
+                <h2 class="text-5xl font-black text-gray-900 tracking-tight uppercase">Local</h2>
+                <div class="h-2 w-24 bg-brand-pink mx-auto rounded-full"></div>
+            </div>
+
+            <div class="bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-gray-100 grid md:grid-cols-2 text-white">
+                <div class="p-12 flex flex-col justify-center bg-brand-purple text-white">
+                    <h3 class="text-3xl font-black mb-8 flex items-center gap-3 text-brand-yellow uppercase text-brand-yellow">
+                        <i data-lucide="map-pinned"></i> LOCALIZAÇÃO
+                    </h3>
+                    <div class="space-y-6 text-lg">
+                        <p class="font-black text-2xl uppercase tracking-tighter">Rafain Palace Hotel & Convention</p>
+                        <p class="opacity-80 uppercase leading-relaxed text-white">Av. Olímpio Rafagnin, 2357 - Foz do Iguaçu - PR</p>
+                        <p class="font-bold text-brand-yellow flex items-center gap-2">
+                            <i data-lucide="phone-call" class="w-5 h-5"></i> (45) 3520-9494
+                        </p>
+                    </div>
+                    <div class="mt-12">
+                        <a href="https://www.google.com/maps/dir//Rafain+Palace+Hotel+%26+Convention" target="_blank" class="inline-flex items-center gap-3 bg-brand-pink text-white px-10 py-5 rounded-2xl font-black hover:scale-105 transition-all uppercase tracking-tighter shadow-xl">
+                            <i data-lucide="navigation"></i> VER NO MAPA
+                        </a>
+                    </div>
+                </div>
+                <div class="h-[500px] w-full bg-slate-200">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3600.97010487042!2d-54.55133642371946!3d-25.506031735165588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94f6904f47547511%3A0xc3457193b2a30b0!2sRafain%20Palace%20Hotel%20%26%20Convention!5e0!3m2!1spt-BR!2sbr!4v1714480000000!5m2!1spt-BR!2sbr" 
+                        class="w-full h-full border-0" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <section id="cronograma" class="space-y-12 scroll-mt-24 text-gray-800">
+            <h2 class="text-4xl font-black text-gray-900 tracking-tight text-center uppercase">Cronograma</h2>
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="bg-white rounded-[2.5rem] shadow-lg border-t-8 border-brand-teal p-8 card-hover">
+                    <h3 class="text-2xl font-black text-brand-teal mb-6 uppercase">12/05</h3>
+                    <div class="space-y-4 text-sm text-gray-700">
+                        <div class="flex gap-3"><span class="font-bold text-brand-teal">15:50 – 17:50</span><p class="text-gray-700 uppercase">Credenciamento</p></div>
+                        <div class="flex gap-3"><span class="font-bold text-brand-teal">18:00 – 20:00</span><p class="text-gray-700 uppercase">Solenidade de Abertura</p></div>
+                        <div class="flex gap-3"><span class="font-bold text-brand-teal">20:00 – 22:00</span><p class="text-gray-700 italic uppercase">Jantar</p></div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-[2.5rem] shadow-xl border-t-8 border-brand-purple p-8 scale-105 z-10 card-hover">
+                    <h3 class="text-2xl font-black text-brand-purple mb-6 uppercase">13/05</h3>
+                    <div class="space-y-4 text-sm text-gray-700">
+                        <div class="flex gap-3"><span class="font-bold text-brand-purple">08:00 – 09:00</span><p class="text-gray-700 font-bold uppercase">Momento IntegrAÇÃO</p></div>
+                        <div class="flex gap-3"><span class="font-bold text-brand-purple">09:00 – 12:00</span><p class="text-gray-700 font-black uppercase">Hackathon</p></div>
+                        <div class="flex gap-3"><span class="font-bold text-brand-pink">12:00 – 13:30</span><p class="text-gray-700 italic font-bold uppercase">Almoço</p></div>
+                        <div class="flex gap-3"><span class="font-bold text-brand-purple">13:30 – 15:30</span><p class="text-gray-700 font-bold uppercase">Oficina 1</p></div>
+                        <div class="flex gap-3"><span class="font-bold text-brand-pink">15:30 – 15:50</span><p class="text-gray-700 italic font-bold uppercase text-brand-pink">Coffee Break</p></div>
+                        <div class="flex gap-3"><span class="font-bold text-brand-purple">15:50 – 17:50</span><p class="text-gray-700 font-bold uppercase">Oficina 2</p></div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-[2.5rem] shadow-lg border-t-8 border-brand-pink p-8 card-hover text-gray-800 text-gray-800">
+                    <h3 class="text-2xl font-black text-brand-pink mb-6 uppercase">14/05</h3>
+                    <div class="space-y-4 text-sm text-gray-700">
+                        <div class="flex gap-3"><span class="font-bold text-brand-pink">08:30 – 11:00</span><p class="text-gray-700 uppercase">Boas Práticas do Formador</p></div>
+                        <div class="flex gap-3"><span class="font-bold text-brand-pink">11:00 – 12:00</span><p class="text-gray-700 uppercase">Palestra de Encerramento</p></div>
+                        <div class="flex gap-3"><span class="font-bold text-brand-pink">12:00 – 13:30</span><p class="text-gray-700 italic font-bold uppercase">Almoço</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="logistica" class="scroll-mt-32 text-gray-800">
+            <div class="grid md:grid-cols-3 gap-8 text-center text-gray-800">
+                <div class="bg-white p-10 rounded-[3rem] shadow-xl border-t-8 border-brand-yellow card-hover">
+                    <div class="bg-yellow-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-brand-yellow"><i data-lucide="hotel"></i></div>
+                    <h4 class="text-xl font-black mb-4 text-brand-purple uppercase">Hospedagem</h4>
+                    <p class="text-sm uppercase font-bold">Check-In: 12/05 às 15H</p>
+                    <p class="text-sm uppercase font-bold text-brand-purple">Check-Out: 14/05 às 12H</p>
+                </div>
+                <div class="bg-white p-10 rounded-[3rem] shadow-xl border-t-8 border-brand-teal card-hover text-gray-800">
+                    <div class="bg-teal-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-brand-teal"><i data-lucide="bus"></i></div>
+                    <h4 class="text-xl font-black mb-4 text-brand-teal uppercase">Transporte</h4>
+                    <p class="text-sm italic uppercase font-semibold leading-relaxed">Consulte seu Ponto Focal Regional para detalhes do embarque.</p>
+                </div>
+                <div class="bg-white p-10 rounded-[3rem] shadow-xl border-t-8 border-brand-pink card-hover text-gray-800 text-gray-800">
+                    <div class="bg-pink-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-brand-pink"><i data-lucide="award"></i></div>
+                    <h4 class="text-xl font-black mb-4 text-brand-pink uppercase">Certificado</h4>
+                    <p class="text-sm italic uppercase font-semibold leading-relaxed">Realizada via sistema SICAPE (participação integral obrigatória).</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="fotos" class="scroll-mt-32">
+            <div class="bg-brand-teal p-12 md:p-20 rounded-[4rem] shadow-2xl text-white text-center space-y-10 relative overflow-hidden text-white">
+                <div class="absolute inset-0 flex items-center justify-center opacity-5"><i data-lucide="aperture" class="w-[500px] h-[500px]"></i></div>
+                <div class="relative z-10 space-y-6">
+                    <div class="bg-white/20 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8"><i data-lucide="images" class="w-12 h-12"></i></div>
+                    <h2 class="text-5xl font-black uppercase tracking-tighter">Álbum de Memórias</h2>
+                    <p class="text-xl opacity-90 max-w-2xl mx-auto italic font-medium text-white">Reviva os melhores momentos do nosso encontro!</p>
+                    <div class="pt-8">
+                        <a href="https://photos.app.goo.gl/ta1hVNJDf4bQgCRu6" target="_blank" class="inline-block bg-brand-yellow text-brand-purple font-black text-2xl px-16 py-8 rounded-3xl shadow-2xl hover:scale-105 transition-all transform uppercase tracking-widest text-purple-900 shadow-xl">ACESSAR ÁLBUM</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white py-20 border-t border-gray-100 text-center text-gray-800">
+        <div class="max-w-4xl mx-auto space-y-6 px-4">
+            <p class="text-2xl italic font-black text-brand-purple leading-tight">"Formadores em Ação, te ajudando a pensar fora da caixa."</p>
+            <div class="h-1.5 w-24 bg-brand-teal mx-auto rounded-full"></div>
+            <p class="font-black text-lg uppercase tracking-widest text-gray-400">Núcleo Formadores em Ação - SEED/PR</p>
+        </div>
+    </footer>
+
+    <script>
+        const DADOS_ENSALAMENTO = [
+            {
+                numero: "01 – MATEMÁTICA",
+                equipe: "Laranja",
+                temas: ["MATEMÁTICA EM", "MATEMÁTICA EF", "RECOMPOSIÇÃO 6º ANO", "RECOMPOSIÇÃO 9º ANO", "RECOMPOSIÇÃO 3ª SÉRIE", "Educação Financeira"],
+                docentes: ["FABIANO SANTOS FERRAZZA", "CAROLINE CARDOSO", "EMANUELLE MARTINS", "DEBORAH BRAGA EITELWEIN", "HILMAR XAVIER DE OLIVEIRA JUNIOR"],
+                participantes: ["ADRIANE DE CASTRO", "ANA PAULA NAHIRNE", "ANAGELA CRISTINA MORETE FELIX", "ANDRESSA RIBEIRO DA COSTA", "ARIADNE CATENACI DE LIMA", "BRUNA SPINARDI", "CARLOS HENRIQUE TAVARES", "CAROLINE CARDOSO", "CELSO MARCZAL", "CESAR FREDERICO CONFORTIN", "CIELI CRISTINA WOITKIV", "CLARA FABER FERNANDES ROTIROTI", "CLARISSE LOURENCO", "CLAUDIA LETICIA CLAUDINO", "CLAUDIA MARIA ALVES", "CRISTIANE BIANCHI CORDEIRO ROSA PINTO", "CRISTINA KOZAN DE BRITO", "DANIELA HARMUCH", "DEBORAH BRAGA EITELWEIN", "DEISE CRISTIANE DE OLIVEIRA", "DIANI CRISTINA GOERGEN BIAZUSSI", "DIJALMARY MATOS PRATES CHAS", "DOUGHERTHY PORTELA DE OLIVEIRA SILVA", "EDINILSON SALATESKI", "EDUARDO DOS SANTOS ZDEPSKI", "ELCIO LUIS VITALLI", "EMANUELLE MARTINS", "FABIA CRUZ MACHADO", "FABIA MELISSA SIQUEIRA", "FABIANA CRISTINA CAETANO", "FABIANO SANTOS FERRAZZA", "FERNANDA MEREDYK", "GISELE ADRIANO", "GISELI SANGUINO", "GISLAINE GERALDA HENDERIKX", "GRAZIELLA CASTELLINI DA COSTA", "HILMAR XAVIER DE OLIVEIRA JUNIOR", "IDALCI DE AZEREDO COUTINHO", "JEZIELY DE CASSIA DA SILVA FONSECA", "JOSEMAR SANTI", "JOSIANE FRANKE GOETZ", "JULIANA SOARES SELLA DE GODOY BUENO", "JULIANE MARIA CHESSIN", "LINOEL BATISTA LANHOSO", "LUANA KWIATKOWSKI VIGANO", "LUCIANE TERESINHA NENEVE", "LUDEMILA REGINA PICCIRILO", "MARCELA DE OLIVEIRA", "MARCELA VANESSA  DA COSTA CAMPOS", "MARCELO DE ASSUNCAO", "MARCELO MEDEIROS", "MARIANE AURELIA DA ROCHA", "MARICLEUSA INGLES DA SILVA GOMES", "MARIZA ROTH", "MAYCON DOS SANTOS FRAGA", "MONICA ALVES DA SILVA", "MONICA SANTANA CRUZ RODRIGUES", "NEIVA ROSA", "NILTON CESAR GARCIA SALGUEIRO", "PATRICIA ALBANI", "PATRICIA MONTEIRO BARBOSA", "PAULO WESLEI ALBERTON", "POLYANNA DE ARAUJO GALDINO", "RAFAELA AUGUSTA DE SOUZA NEVES", "RAQUEL DA FONSECA", "RENATA ANDRESSA COSTA DA SILVA", "RITA KARINA DE OLIVEIRA", "ROBERTO APARECIDO DE GOES", "ROSITA APARECIDA BUENO", "SHEYLA PRISCILA DOS SANTOS LOBEIRO", "SILVANA SAR ACACIO", "SILVIA VALESKI", "SIMONE MARIA BALESTRIN QUEIROZ", "SIMONE NERES FIGUEREDO", "SONIA ORACILIO DUARTE"],
+                corHeader: "border-orange-500",
+                corTextoEquipe: "text-orange-600"
+            },
+            {
+                numero: "02 – LÍNGUA PORTUGUESA",
+                equipe: "Turquesa",
+                temas: ["PLATAFORMA REDAÇÃO E LEITURA", "RECOMPOSIÇÃO 6º ANO", "RECOMPOSIÇÃO 9º ANO", "RECOMPOSIÇÃO 3ª SÉRIE", "LÍNGUA PORTUGUESA EF", "LÍNGUA PORTUGUESA EM"],
+                docentes: ["MARINA SIQUEIRA PERSEGONA SCHUHLI", "DAIANA BUENO CORDEIRO MAZUR", "ANA PAULA ISTSCHUK", "ADRIELE LESKI KRAJ", "DINÁ DE OLIVEIRA LIPSKI"],
+                participantes: ["ADRIANA APARECIDA SASSE", "ADRIANE CHERPINSKI KOCH", "ADRIELE LESKI KRAJ", "ALINE CRISTINA FERNANDES", "AMAURI DE LIMA", "ANA CLAUDIA COSTA FONTANA", "ANA PAULA ISTSCHUK", "ANDREA IGNASZEWSKI CYMBALISTA", "ANDREIA DE PAULA MOURA", "ANDREIA JAQUELINE BACH", "ANTONIO DE ARAUJO", "CLEBERSON ODAIR LEONHARDT", "CLEVERSON LUCAS DOS SANTOS", "CONSUELO REGINA ALONSO", "CRISTINA HINTERLANG E SILVA", "DAIANA BUENO CORDEIRO MAZUR", "DAIANE MARIA PAGNONCELLI GUARDA", "DANIELA HUBNER MUNHOZ", "DANIELLE CONDE MENDES", "DAVID DE SOUSA OLIVEIRA", "DINA DE OLIVEIRA LIPSKI", "EDEMUNDO GLIENKE", "EDIMARA KLAINE STELLA", "ELAINE CRISTINA PINHEIRO FAVERZANI", "ELIANA APARECIDA DA SILVA GAVA", "ELIANE LUIZA DE AGUIAR FRANCISCHINI", "ELIETE MARIA DE SA", "FABIANA DE LOURDES DOS SANTOS", "FERNANDA DE FATIMA ARAUJO", "FERNANDA KHALIL", "GISELE FERNANDA FORNAZZA VENTURINO GARCIA", "GISLENE AZEVEDO SESTITO", "IARA MIKAL HOLLAND OLIZAROSKI", "ILSE REZLER", "JAQUELINE APARECIDA DOS SANTOS DUTRA", "JAQUELINE CORDEIRO BERNARDO PICONE", "JOAO PEDRO DA SILVEIRA", "JOICE BERNASKI", "JUNIOR SERGIO BARD", "LEANDRO TAFURI", "LEILA APARECIDA KELLER MEI", "LENICE ALVES DA SILVA STENCEL", "LIARA ALBERTONI", "LILIAN MAIA BORGES TESTA", "LILIANE IEDA DRESCH TOMASI", "LUCIANA NASCIMENTO", "LUIS ALBERTO DE SOUZA SANTOS", "MARINA SIQUEIRA PERSEGONA SCHUHLI", "MARION CRISTINE WENTZ DE SOUZA", "MARISTELA MACIAS NOGUEIRA", "MARTA MARIA VILELA", "MAYARA FERREIRA DE OLIVEIRA", "NUBIANE KAILER DOS SANTOS COELHO", "PAMELA DA SILVA CAMOCARDI", "PATRICIA LOCH RAMALHO", "POLIANA DOS SANTOS SILVA DE LAZARI", "PRISCILA JULIANA RUIZ LIMA", "RAFAELLA SALVINI", "ROSELY SILVA DA LUZ", "ROSEMARY TEREZINHA PACHELI BRUSCHZ", "ROSEMEYRE FLORIANO CARVALHO DUARTE", "ROSILANE BECK BENSI", "ROSIVANER DE MELLO CALVO", "SERGIO DE ANDRADE", "SHIRLEI PEREIRA DOS SANTOS MUNHOZ", "SILVANA CATTELAN", "SIMONE APARECIDA MACHADO MIRA", "TATIANI TERESINHA GALVAN COSTA", "VANESSA SOCIO DE ASSIS", "VANIA MARIA CENCI STEDILE", "VIVIANE BARBOSA DE SOUZA", "VIVIANE PATRICIA VALENGA", "WIRGINIA PORTELA BARBOSA DA SILVA"],
+                corHeader: "border-cyan-400",
+                corTextoEquipe: "text-cyan-600"
+            },
+            {
+                numero: "03 – PROJETO INTEGRADOR",
+                equipe: "Roxa",
+                temas: ["PROJETO INTEGRADOR: ECONOMIA E CULTURA PARANAENSE", "PROJETO INTEGRADOR: INTELIGÊNCIA ARTIFICIAL E TECNOLOGIAS", "PROJETO INTEGRADOR: LITERATURA E SOCIEDADE", "PROJETO INTEGRADOR: RESOLUÇÃO DE PROBLEMAS"],
+                docentes: ["ANA PAULA BARBOSA", "ENEGELLY ANTÔNIA PILAR TEBALDI", "BRUNA RECKZIEGEL (ALURA)", "MICHELLE DOS SANTOS (DTI)", "MARCIA CRISTINA NASCIMENTO", "DENISE EURICH COLATUSSO", "ALESSANDRA CARPEN SCHULTZ", "DÉBORA CRISTINA HOLM ROSA", "MARCIO JOSÉ UKOSKI"],
+                participantes: ["ADILSON FERNANDES DA CRUZ", "ALESSANDRA CARPEN SCHULTZ", "ANA PAULA BARBOSA", "ANA RITA DALLA COSTA", "ANDREA TIEMI KANASHIRO", "ANDREIA CAETANO RODRIGUES", "ANGELA MARIA COTTICA", "ARI DOS SANTOS SILVEIRA PINTO JUNIOR", "BRUNA BANDEIRA DA LUZ", "BRUNA RECKZIEGEL", "CAMILA APARECIDA MACHADO GOMES", "CINTYA BRAZ CORDEL", "CLAUDIA URSULA BOCHANOSKI MARTINHO", "CLEUZA MARIA REICHERT", "DANIELI PORFIRIO PARRA", "DEBORA CRISTINA HOLM", "DENIS DA SILVA CARVALHO", "DENISE EURICH COLATUSSO", "EDSON BUCKO TUFFI", "ENEGELLY ANTONIA PILAR TEBALDI", "ERIKA DE OLIVEIRA SERIAL GELINSKI", "ESTIVERSON FELIPE DE OLIVEIRA", "FABIANA RIBEIRO DE ALMEIRA", "FERNANDA FRANCIELE KRASOTA MACHADO", "FRANCELINE PRISCILA GUSMAO", "FRANCIELLY SPERANDIO DE SOUZA", "GISELE CAVALCANTE MORAIS MILLEO", "GUIDO VALMOR BUSS", "HELIO CLEMENTE FERNANDES", "HILDA MORAIS DO PARAIZO", "INGRID HASS ALVES DE OLIVEIRA", "JANINHA APARECIDA PEREIRA", "JEANE APARECIDA ALVES DE SOUZA", "JEOVANIA FABRO", "JOSANA GOMES RAMOS DA SILVA", "JOSE ROBERTO DE OLIVEIRA", "JOSIANE MACARINI CAVANI", "JOSILENE DE PAIVA KANASHIRO", "JUCILEI APARECIDA BETIM SANTOS", "JULIO WESCESLAU MACOWSKI", "KELLY CARLA PEREZ DA COSTA", "LEA APARECIDA MARINHO DE OLIVEIRA", "LETICIA RISSO CASAGRANDE", "LUIZA APARECIDA CORDEIRO POLAK", "MARCIA CRISTINA NASCIMENTO", "MARCIO JOSE UKOSKI", "MARISETE APARECIDA SPAGNOLLO PRATES", "MARLENE DE MELLO BOLLER", "MAYARA DE GOES BATISTA", "MICHELE PLANTES DE ANDRADE CAMARGO", "MICHELLE DOS SANTOS", "NEVILDE DE LOURDES GONCALVES DA ROCHA CEZAR", "NICOLLE MONTALVAO PEREIRA", "NOEMI GUEDIN DE ALMEIDA", "NUBIA BRESSAN GUIRALDELI", "PATRICIA DE OLIVEIRA RIBEIRO", "PAULA ALEXANDRA REIS BUENO", "PAULO ROBERTO SCHNEIDER", "POLIANA DE OLIVEIRA BELLON", "SANDRA GORETE GOMES DE OLIVEIRA", "SANDRA MAIRA BOLZON", "SILVANA DE FATIMA CARRARA", "SILVIA LEMES DOS SANTOS BONIN", "THAIANE FERREIRA", "VANESSA ELVIRA BONOMETO TENCZNA", "WAGNER DOS SANTOS SOARES"],
+                corHeader: "border-brand-purple",
+                corTextoEquipe: "text-brand-purple"
+            },
+            {
+                numero: "04 – CIÊNCIAS HUMANAS",
+                equipe: "Jade",
+                temas: ["HISTÓRIA", "FILOSOFIA", "ENSINO RELIGIOSO", "SOCIOLOGIA", "GEOGRAFIA", "CIDADANIA E CIVISMO", "PROJETO DE VIDA", "CLIMA ESCOLAR"],
+                docentes: ["ALESSANDRO CAVASSIN ALVES", "ALESSANDRO REINA", "MAIARA PEREIRA BARROS", "MARCOS ANTONIO QUEIROZ", "ROSINEIDE FREZ", "ANDREY SANTOS SOUZA", "BRUNA CUNHA FERNANDES", "DELZA MARINA PEREIRA DO VALE ARAUJO", "DENISE DANIELE DE MEDEIROS"],
+                participantes: ["ALESSANDRO CAVASSIN ALVES", "ALESSANDRO REINA", "ALINE REGINA LEMES DE SENE", "ANA PAULA PAULINO DE OLIVEIRA", "ANDREY SANTOS SOUZA", "BRUNA FERNANDES DA CUNHA", "CACIA APARECIDA MENDES RUDNICKI", "CESAR AUGUSTO FRAGA DE SOUZA", "CLAUDIA DA SILVA KRYSZCZUN", "CLAUDIA PATRICIA DE SOUZA", "CLAUDIA REGINA SILVA DA EIRA", "CRISTIANE NUNES DE LIMA GOMES", "CRISTINA ROSANA FERRARI", "DANIEL APARECIDO RIBEIRO", "DANIELA FRANCISCA DA CRUZ RODRIGUES", "DEBORA ADRIANA ALVES", "DELZA MARINA PEREIRA DO VALE", "DENISE DANIELE DE MEDEIROS", "DIOVANI GRANDO", "EDIMARA DOMINGUES DE OLIVEIRA", "EDNA APARECIDA FILIPIM", "ERICA SIQUEIRA RODRIGUES", "ERMELINDA RUANI JORDAO PACAGNELLI", "FLAVIO LUIS GOMES DE OLIVEIRA", "GILCIMAR KRUGER", "GISELE MINOZZO DOS SANTOS", "IRENILSON LUBACHESKI", "JANAINA APARECIDA PINTO", "JANETE FATIMA HUBLER DOS SANTOS", "JANICE COSTA DA SILVA FAURO", "JOAO CLAUDIO ALCANTARA DOS SANTOS", "JOAO SAMUEL BATISTA", "JOSIMARA DE AZEVEDO FARIA", "JULIANA BASTOS", "JULIANA BESSON GUBERT", "JULIANE REGINA BECKER", "KARINA MENDES REIS", "KESIA LIRIAM MENEGUEL", "KETOLI DE OLIVEIRA", "LEIZA DANIELE ZANDER KUSMIRSKI", "LETICIA CRISTINA DOS SANTOS GARCIA", "LUCIA SIQUEIRA DA SILVA", "LUCIANA DE ABREU KIRIU SEFRIN", "LUCIANE MORMELLO GOHL", "LUCIANE SOUZA MARTINS", "LUCIELE ALVES CUZZI", "LUIS CARLOS BRAGA", "LUIS CASSIANO GOMES DA SILVA", "MAIARA PEREIRA BARROS", "MARCIA REGINA VIERO", "MARCIO RICARDO VITOR", "MARCOS ANTONIO QUEIROZ", "MILAINE DE LIMA PEREIRA", "PATRICK FERNANDO DE OLIVEIRA", "POLIANA DE OLIVEIRA FABRIN", "PRISCILA CAMARA DA SILVA MICALISKI", "PRISCILA MARTINS FERNANDES", "RAQUEL FIAES JORDAO ROSA", "RODRIGO SCANDIO BENEVIDES", "ROSANA SCHEFFER", "ROSINEIDE FREZ", "SEBASTIANA LOPES DE MIRANDA BENDO", "SERGIO RICARDO DLUGOSZ", "SILVIA PATRICIA DA SILVA MARQUES", "SIMONE CRISTINA INCOTE", "SOLANGE REGINA FROGUEL", "SUZI ADRIANE ZUMAS SILVA", "TAMARA LUZ DE SOUZA GIOVANONI", "TANIA KIELING", "TATIANA PEREIRA DA SILVA", "THIAGO AUGUSTO DOS SANTOS", "ULISSES MATHEUS FELIPE PESSOA", "WALDIRLEIA BARAGATTI CABRERA", "WILLIAN SAMUEL SANTANA DA ROZA"],
+                corHeader: "border-emerald-500",
+                corTextoEquipe: "text-emerald-600"
+            },
+            {
+                numero: "05 – CIÊNCIAS DA NATUREZA",
+                equipe: "Rosa",
+                temas: ["QUÍMICA", "FÍSICA", "BIOLOGIA", "CIÊNCIAS", "ROBÓTICA EDUCACIONAL", "LÓGICA COMPUTACIONAL", "EDUCAÇÃO  DIGITAL EF", "EDUCAÇÃO DIGITAL EM"],
+                docentes: ["MICHELE DIAS", "GABRIELA RIBAS (ALURA)", "RODRIGO WUNSCH MANIKA", "MICHELE SERPE", "LIZIANE BARBARA BUGALSKI", "MICHELLE SANTOS (CAFF)"],
+                participantes: ["ANDREIA MARTINS", "ANDREIA ROLIM DELGADO BUCKTA", "ANGELA ROSSATTO DA LUZ", "ARTHUR CONTI TOFFANETTO", "CAROLINA DA SILVA GONCALVES", "CAROLINNE MORATTO MENDES", "CESAR BARBOSA DE SOUZA", "CRISTIANELA SUSIN", "DANIEL OLEGARIO DA SILVA", "DANIELA ANGIE FERRANDO", "DANIELLY PIETROCHINSKI", "EDENILSE GOMES", "ELAINE PACHECO COSTA", "ELENICE DE CASSIA MACHOVSKI", "ELIANE CRISTINA DOS SANTOS", "ELISANGELA SIMONELLI PERON", "EMERSON DA SILVA DELFINO", "EMIR CAMPAGNARO", "ETHIENE SERRANO ALVES", "FERNANDA GAMBERINI RUIZ", "FERNANDO TEMPORINI FREDERICO", "FRANCIELLE SIQUEIRA", "GABRIELA RIBAS", "GISELE APARECIDA FIDELIS", "GISLAYNE MARQUES TOMBOLIN SANTOS", "GUSTAVO BARIZON MARANHO", "INGRID ALINE DE CARVALHO FERRASA", "JAQUELINE ANDREIA TAFAREL", "JESSICA HUZEK", "JOCIMARA MONSANI", "JULIANA BUENO RUIZ REBECA", "LIZIANE BARBARA BUGALSKI", "LUCAS DANIEL PERIN", "LUDMILLA BAPTISTA SABATKE", "MARCELO GASPARIN", "MARIA CECILIA FONSECA DE LIMA", "MARIEL MARTINS", "MICHELE DIAS", "MICHELE SERPE FERNANDES", "MICHELLE SANTOS", "NEIDE IARA SANTOS SILVEIRA DE OLIVEIRA", "PATRICIA JUSTEN DA SILVA", "RAFAEL DE MORAES SANCHES", "RAFAEL LUIZ VENANCIO", "RAFAEL ROGER NORA", "RODRIGO WUNSCH MANIKA", "ROGERIO NAVES DOS REIS", "ROSANE INES DAL BOSCO BAGGIO", "SILVIA MIOTO", "SILVIA STELMASTCHUK", "SILVIO TOME DA SILVA", "TIAGO JUNIOR GOBETTI", "VANDA GUSMAO DOBRANSKI BATISTA", "VIVIANI XAVIER DA SILVA", "WESLEY EDUARDO CORDEIRO"],
+                corHeader: "border-brand-pink",
+                corTextoEquipe: "text-brand-pink"
+            },
+            {
+                numero: "06 – LINGUAGENS",
+                equipe: "Amarela",
+                temas: ["ARTE", "EDUCAÇÃO FÍSICA", "LÍNGUA INGLESA", "DESENVOLVENDO A FLUÊNCIA EM LÍNGUA INGLESA", "LÍNGUA ESPANHOLA", "EDUCAÇÃO ESPECIAL"],
+                docentes: ["FRANCINE CRUZ GRISON", "ELENICE GUTERVILLE ALVES", "GABRIELA VIEIRA DE SOUZA MANIERI", "ANDREIA CARDOSO MONTEIRO", "DAYANE COPATI DOMINGOS"],
+                participantes: ["ALESSANDRO PAWLAS CARAZZAI", "ALEXSANDRO ALVES DA MAIA", "ANA FLAVIA DAVIES", "ANA PAULA PEREIRA", "ANDREA BORGES FERRAZOLI SIMONI", "ANDREIA CARDOSO MONTEIRO", "ANDREIA GRACIANO MARTIN GONCALVES", "ANDRIELE APARECIDA HEUPA", "BRUNO GONCALVES DOS SANTOS", "CAROLINA CASIMIRA MOLINA", "CAROLINA DESIREE MERISIO", "CESAR AUGUSTO MARTIN DE SOUZA", "CLARICE CONCEICAO BONGIORNO", "CLAUDIA LUIZA MIORANZA RIBEIRO", "CLAUDIA REGINA BILEK DIAS", "CLEVERSON VENANCIO", "DAIANE DE SOUZA CAMPANHOLI ACORSSI", "DANIELE MARIA CASTANHO BIRCK", "DANIELLE LORENCO", "DAYANE COPATI DOMINGOS", "DEBORA DE ROCCO BORGES", "ELENICE GUTERVILLE", "ELIANA BALLAROTTI DO NASCIMENTO", "ELIANE MONTEIRO HRECIUK", "ELISIANE DO CARMO NENEVE", "EUZA VIRGINIA CAGNATO", "FABIANA SILVA AZEVEDO TRAVAGLIA", "FATIMA MORAES", "FRANCIANE APARECIDA DOS SANTOS RIZINESK", "FRANCINE CRUZ GRISON", "GABRIEL JERONYMO CURTI", "GABRIELA VIEIRA DE SOUZA MANIERI", "GEORGIANA NARDI VIDAL MACENO", "GISELLE FERREIRA DE SOUZA", "GISELLY ALVES MARTINS", "INGUELISE DUNKE DE LIMA FRIESEN", "IRENE CORREA SILVA", "JANE MARIA DE OLIVEIRA BANUTH", "JANETE DALL AGNOL CAMARA", "JOAO ANTONIO DOS SANTOS DE LIMA", "JOSE AUGUSTO HARTMANN", "KELI PEREIRA MALAQUIAS", "LEQSSANDRO BORGES DA SILVA", "LILEAN CRISTINA GONCALVES CIPRIANO", "LILIANA ISABEL CARDOSO DA SILVA RIECHTER", "LORENA WEINFURTER GUIMARAES", "LUCELIA BATISTA MELO", "LUCIANA BARIZON PIRES", "MAGALI DE FATIMA FLORE", "MAIARA QUEIROZ DA COSTA", "MARCIA ALAMINO CARDOSO DE ALCANTARA", "MARCIA NAZARE DE OLIVEIRA SANTOS", "MARINALVA BORGES FERREIRA", "OSNI ZIOLI", "PATRICIA ARGENTON", "PATRICIA LOPES GONCALVES", "PATRICIA RECH DE ARAUJO", "PATRICIA VERONA DE FREITAS", "PAULETE CRISTIANE DE OLIVEIRA", "RAQUEL RAFAELLA RODRIGUES", "REGIANE DE FATIMA SIQUEIRA ALBERTI", "REGINALDO MARQUES", "REINALDO DOS SANTOS MARQUES FILHO", "SILVANA MARIA VIECELI DE SOUZA", "SIRLEI BATISTA FRANCO CARVALHO", "SOLANGE ALVES PEREIRA", "VANDA APARECIDA DE CAMPOS ANTUNES", "VANESSA SPINELO HEYDT", "VANESSA STAFUSA SALA DENUZI", "VIVIANY SALOM DE MIRANDA ZAVERI", "WAYNNE FERREIRA DE FARIA"],
+                corHeader: "border-brand-yellow",
+                corTextoEquipe: "text-yellow-600"
+            },
+            {
+                numero: "07 – TEMAS DIVERSOS",
+                equipe: "Vermelha",
+                temas: [
+                    "PROGRAMA PARANÁ INTEGRAL", 
+                    "SAÚDE MENTAL", 
+                    "EJA - FORMAÇÃO GERAL", 
+                    "EDUCAÇÃO DO CAMPO E SUAS ESPECIFICIDADES", 
+                    "DOCÊNCIA NA EDUCAÇÃO PROFISSIONAL", 
+                    "ED. PROF. COORDENAÇÃO DE CURSO", 
+                    "ED. PROF. FORMAÇÃO DE DOCENTES"
+                ],
+                docentes: [
+                    "MARILEY DUARTE ROCHA DE OLIVEIRA",
+                    "ANA SUELI RIBEIRO VANDRESEN",
+                    "CLEIDI SCHINDLER",
+                    "GECEONI FATIMA CANTÉLI JOCHELAVICIUS",
+                    "YARA SCHEIDWEILER",
+                    "PRISCILA DE CASTRO BACHMANN",
+                    "NOELI APARECIDA DE MELLO",
+                    "MONALISA DE LOURDES SERPE",
+                    "SILVIANE LIMA",
+                    "GIZELLE CRISTINA DE SOUZA GAZZI",
+                    "HENRIQUE ABE OGAKI",
+                    "RAMIEL DUARTE DA SILVA"
+                ],
+                participantes: [
+                    "ABIGAIL DE CARVALHO SILVA", "ADRIANA DE OLIVEIRA CORREIA BRUSTOLIM", "ADRIANA PIECHNICKI", 
+                    "ALESSANDRA OLIVEIRA DOS SANTOS BELTRAMIM", "ALINE ESTIMA DE ANDRADES OTTO", "ANA RAQUEL MACHADO POLEZE", 
+                    "ANA ROSELI VALENGA BONETE", "ANA SUELI RIBEIRO VANDRESEN", "APARECIDA VIEIRA CINTRA", 
+                    "BRUNA CARLINE ALVES", "CARLA REGINA RODACKI KLOSSOWSKI", "CARMEN FRANTZ KLIEMANN", 
+                    "CHRISTINE MISAEL VEDOVATTE", "CLEIDI SCHINDLER", "CRISTINA KANARSKI", "DINORA CASAGRANDE", 
+                    "DULCENI TEREZINHA AVILA BRUNETTI", "EDNA LUIZA DE SOUZA", "ELIANE KLIER DA SILVA", 
+                    "ELISANGELA TOSETTO TEIXEIRA", "ELIZABETE EGIMINIANO DE SOUZA", "ERICA ALVES FERNANDES DE ANDRADE", 
+                    "FRANCIS EDER RIBEIRO DA SILVA", "FRANCISCA DE FATIMA DROSDOSKI SANTOS", 
+                    "GECEONI FATIMA CANTELI JOCHELAVICIUS", "GISELI DUCAT", "GISLAINE DA SILVA DE OLIVEIRA", 
+                    "GIZELLE CRISTIANE DE SOUZA GAZZI", "GREICYLENE GREATTI", "HENRIQUE ABE OGAKI", "ISIS MARIA CORREA", 
+                    "JANETE DA SILVA PEDROSO", "JOAO PAULO DA ROCHA", "JOSIELE OLEINIK NERI", "JUDITH APARECIDA DE SOUZA BEDE", 
+                    "JULIO CESAR FREDERICO LORDELLO ALVES", "KAROLINE DE AZEVEDO FERREIRA RODRIGUES", "LARISSA BEATRIZ ADAO", 
+                    "LOURIVAL DE ARAUJO FILHO", "LUANA PORTO", "LUCIANA RODRIGUES RAMOS", "MARCIA CRISTINA NUNES", 
+                    "MARCIA FERREIRA BINI", "MARCIA SOLETTI", "MARCOS AURELIO DE ASSIS", "MARCOS EVANDRO AIRES GUINE", 
+                    "MARIA DIRCIONE DA SILVA", "MARIA HELENA COSTA NASCIMENTO", "MARIA JANETE DE LIMA", 
+                    "MARILEY DUARTE ROCHA DE OLIVEIRA", "MARILYN BELONI LAUREANO", "MARIUSA CRISTIANE BAUM PETRI", 
+                    "MIRIAM TEIXEIRA DE OLIVEIRA", "MONALISA DE LOURDES SERPE", "MONALIZE MARTA MORENO", 
+                    "NOELI APARECIDA DE MELLO", "PATRICIA ALVES DA ROCHA", "PRISCILA DE CASTRO BACHMANN", 
+                    "RAMIEL DUARTE DA SILVA", "REGIANE CRISTINA DOS SANTOS PIRES", "RENATA BERTOLI LUDWIG", 
+                    "ROSANGELA SIQUEIRA PINHEIRO DE GOES", "SANDRA ELIZETTE KANNO ROBLES DE ROSSI", "SILVIA RENATA ZANON", 
+                    "SILVIA SANDRA BIUDES", "SILVIANE STOCKLER DE LIMA", "VALDETE MORAIS DA SILVA", "VALERIA GEREMIAS DE MORAES", 
+                    "VANESSA MORAES DE LIMA BICUDO", "VANESSA ROCHA ZACARIAS", "VANESSA SANTOS FONTEQUE", 
+                    "VITORIA REGINA TAKEUCHI FERNANDES", "YARA SCHEIDWEILER"
+                ],
+                corHeader: "border-red-500",
+                corTextoEquipe: "text-red-600"
+            }
+        ];
+
+        lucide.createIcons();
+
+        function renderizarSalas() {
+            const container = document.getElementById('grade-salas');
+            container.innerHTML = DADOS_ENSALAMENTO.map((sala, index) => `
+                <div class="bg-white p-8 rounded-[3rem] shadow-xl border-t-8 ${sala.corHeader} card-hover flex flex-col h-full text-gray-800">
+                    <div class="mb-6">
+                        <h3 class="text-2xl font-black text-brand-purple uppercase leading-tight">SALA ${sala.numero}</h3>
+                        <p class="${sala.corTextoEquipe} font-black uppercase text-sm mt-1 tracking-widest">EQUIPE - COR ${sala.equipe}</p>
+                    </div>
+
+                    <div class="flex-1 space-y-6">
+                        <div>
+                            <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-1">TEMAS</p>
+                            <div class="font-bold text-gray-700 uppercase leading-snug text-sm">
+                                ${sala.temas.length > 0 ? sala.temas.map(t => `<p>${t}</p>`).join('') : 'AGUARDANDO INFORMAÇÕES'}
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-1">DOCENTES</p>
+                            <div class="font-bold text-brand-purple uppercase leading-snug text-sm">
+                                ${sala.docentes.length > 0 ? sala.docentes.join('<br>') : 'AGUARDANDO INFORMAÇÕES'}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <button onclick="abrirModal(${index})" class="w-full bg-slate-100 text-gray-600 py-5 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-brand-purple hover:text-white transition-all shadow-sm flex items-center justify-center gap-2">
+                            <i data-lucide="users" class="w-4 h-4"></i> Lista de participantes
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        renderizarSalas();
+
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuOverlay = document.getElementById('menu-overlay');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu(show) {
+            if (show) {
+                mobileMenu.classList.add('mobile-menu-open');
+                menuOverlay.classList.remove('hidden');
+                setTimeout(() => menuOverlay.classList.add('opacity-100'), 10);
+                document.body.style.overflow = 'hidden';
+            } else {
+                mobileMenu.classList.remove('mobile-menu-open');
+                menuOverlay.classList.remove('opacity-100');
+                setTimeout(() => menuOverlay.classList.add('hidden'), 300);
+                document.body.style.overflow = '';
+            }
+        }
+
+        if(menuToggle) menuToggle.addEventListener('click', () => toggleMenu(true));
+        if(menuClose) menuClose.addEventListener('click', () => toggleMenu(false));
+        if(menuOverlay) menuOverlay.addEventListener('click', () => toggleMenu(false));
+        mobileLinks.forEach(link => link.addEventListener('click', () => toggleMenu(false)));
+
+        const eventDate = new Date('May 12, 2026 15:50:00').getTime();
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const diff = eventDate - now;
+
+            if (diff <= 0) {
+                document.querySelectorAll('.countdown-box span[id]').forEach(el => el.textContent = '00');
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            if(document.getElementById('days')) document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            if(document.getElementById('hours')) document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            if(document.getElementById('minutes')) document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            if(document.getElementById('seconds')) document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        const modal = document.getElementById('modal-participantes');
+        const modalTitulo = document.getElementById('modal-titulo');
+        const listaNomes = document.getElementById('lista-nomes');
+
+        function abrirModal(index) {
+            const sala = DADOS_ENSALAMENTO[index];
+            modalTitulo.textContent = `SALA ${sala.numero}`;
+            
+            if (sala.participantes.length > 0) {
+                const nomesOrdenados = [...sala.participantes].sort();
+                listaNomes.innerHTML = nomesOrdenados.map(nome => `<p class="border-b border-gray-50 py-2">${nome}</p>`).join('');
+            } else {
+                listaNomes.innerHTML = `<p class="col-span-full italic text-gray-400 p-8 text-center">AGUARDANDO A INCLUSÃO DOS NOMES DOS PARTICIPANTES DESTA SALA.</p>`;
+            }
+            
+            modal.classList.add('modal-active');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+
+        function fecharModal() {
+            modal.classList.remove('modal-active');
+            document.body.style.overflow = '';
+        }
+    </script>
+
+</body>
+</html>
