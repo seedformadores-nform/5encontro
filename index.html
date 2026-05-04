@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5º Encontro de Formadores - Fortalecendo Saberes 2026</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body { 
+            font-family: 'Inter', sans-serif; 
+            scroll-behavior: smooth; 
+        }
+
+        :root {
+            --brand-yellow: #ffcb29;
+            --brand-teal: #58bbb6;
+            --brand-purple: #80509a;
+            --brand-pink: #ee549a;
+        }
+
+        .bg-brand-yellow { background-color: var(--brand-yellow); }
+        .text-brand-yellow { color: var(--brand-yellow); }
+        .bg-brand-teal { background-color: var(--brand-teal); }
+        .text-brand-teal { color: var(--brand-teal); }
+        .bg-brand-purple { background-color: var(--brand-purple); }
+        .text-brand-purple { color: var(--brand-purple); }
+        .bg-brand-pink { background-color: var(--brand-pink); }
+        .text-brand-pink { color: var(--brand-pink); }
+
+        .section-gradient-purple {
+            background: linear-gradient(135deg, #80509a 0%, #6a3d82 100%);
+        }
+
+        .hero-badge {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .countdown-box {
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 1rem;
+            padding: 1rem;
+            min-width: 80px;
+        }
+
+        #mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .mobile-menu-open {
+            transform: translateX(0) !important;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+
+        .modal-active {
+            display: flex !important;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .view-transition {
+            animation: fadeIn 0.4s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-gray-800 overflow-x-hidden">
+
+    <!-- Navegação -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="showView('home')">
+                    <div class="bg-brand-teal p-2 rounded-xl">
+                        <i data-lucide="graduation-cap" class="text-white"></i>
+                    </div>
+                    <span class="font-black text-brand-purple text-xl tracking-tighter uppercase hidden sm:block">Fortalecendo Saberes</span>
+                </div>
+                
+                <div class="hidden md:flex space-x-6">
+                    <a href="javascript:void(0)" onclick="showView('home')" class="text-gray-500 font-semibold hover:text-brand-purple transition-colors uppercase text-sm">Início</a>
+                    <a href="javascript:void(0)" onclick="showView('oficinas')" class="text-gray-500 font-semibold hover:text-brand-purple transition-colors uppercase text-sm">Ensalamento</a>
+                    <a href="javascript:void(0)" onclick="showView('boas-praticas')" class="text-gray-500 font-semibold hover:text-brand-purple transition-colors uppercase text-sm">Boas Práticas</a>
+                    <a href="javascript:void(0)" onclick="scrollToSection('local')" class="text-gray-500 font-semibold hover:text-brand-purple transition-colors uppercase text-sm">Local</a>
+                    <a href="javascript:void(0)" onclick="scrollToSection('cronograma')" class="text-gray-500 font-semibold hover:text-brand-purple transition-colors uppercase text-sm">Cronograma</a>
+                    <a href="javascript:void(0)" onclick="scrollToSection('fotos')" class="text-gray-500 font-semibold hover:text-brand-purple transition-colors uppercase text-sm">Fotos</a>
+                </div>
+
+                <button id="menu-toggle" class="md:hidden p-2 text-brand-purple">
+                    <i data-lucide="menu" class="w-8 h-8"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Overlay e Menu Lateral Mobile -->
+    <div id="menu-overlay" class="fixed inset-0 bg-black/50 z-[60] hidden opacity-0 transition-opacity duration-300"></div>
+    <div id="mobile-menu" class="fixed top-0 right-0 h-full w-72 bg-white z-[70] shadow-2xl p-8 flex flex-col gap-6 translate-x-full text-gray-800">
+        <div class="flex justify-between items-center mb-4">
+            <span class="font-black text-brand-purple text-lg uppercase">Menu</span>
+            <button id="menu-close" class="text-gray-500"><i data-lucide="x" class="w-8 h-8"></i></button>
+        </div>
+        <a href="javascript:void(0)" onclick="showView('home')" class="mobile-link text-lg font-bold text-gray-700 hover:text-brand-purple uppercase">Início</a>
+        <a href="javascript:void(0)" onclick="showView('oficinas')" class="mobile-link text-lg font-bold text-gray-700 hover:text-brand-purple uppercase">Oficinas</a>
+        <a href="javascript:void(0)" onclick="showView('boas-praticas')" class="mobile-link text-lg font-bold text-gray-700 hover:text-brand-purple uppercase">Boas Práticas</a>
+        <a href="javascript:void(0)" onclick="scrollToSection('local')" class="mobile-link text-lg font-bold text-gray-700 hover:text-brand-purple uppercase">Local</a>
+        <a href="javascript:void(0)" onclick="scrollToSection('cronograma')" class="mobile-link text-lg font-bold text-gray-700 hover:text-brand-purple uppercase">Cronograma</a>
+    </div>
+
+    <!-- VIEW PRINCIPAL (HOME) -->
+    <div id="view-home" class="view-transition">
+        <!-- Cabeçalho (Header) -->
+        <header id="inicio" class="relative section-gradient-purple text-white py-24 px-4 overflow-hidden text-center">
+            <div class="absolute top-0 left-0 w-64 h-64 bg-brand-pink opacity-20 blur-3xl -ml-32 -mt-32"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-brand-teal opacity-20 blur-3xl -mr-48 -mb-48"></div>
+            
+            <div class="max-w-5xl mx-auto relative z-10">
+                <div class="flex flex-wrap justify-center gap-3 mb-8">
+                    <div class="hero-badge px-6 py-2 rounded-full flex items-center gap-2">
+                        <i data-lucide="calendar" class="w-4 h-4 text-brand-yellow"></i>
+                        <span class="text-sm font-bold uppercase tracking-wider">12 a 14 de maio de 2026</span>
+                    </div>
+                    <div class="hero-badge px-6 py-2 rounded-full flex items-center gap-2">
+                        <i data-lucide="map-pin" class="w-4 h-4 text-brand-yellow"></i>
+                        <span class="text-sm font-bold uppercase tracking-wider">Foz do Iguaçu - PR</span>
+                    </div>
+                </div>
+
+                <p class="uppercase tracking-[0.2em] text-brand-yellow font-black mb-4 text-xs md:text-sm">Secretaria da Educação do Paraná</p>
+                <h1 class="text-4xl md:text-7xl font-black mb-4 leading-[1.1] tracking-tight">5º Encontro de Formadores</h1>
+                <p class="text-xl md:text-3xl font-medium mb-12 italic opacity-90">Fortalecendo Saberes</p>
+                
+                <div class="flex justify-center gap-3 md:gap-6 mb-12">
+                    <div class="countdown-box">
+                        <span id="days" class="block text-3xl md:text-5xl font-black text-brand-yellow">00</span>
+                        <span class="text-[10px] uppercase font-bold tracking-widest opacity-60">Dias</span>
+                    </div>
+                    <div class="countdown-box">
+                        <span id="hours" class="block text-3xl md:text-5xl font-black text-white">00</span>
+                        <span class="text-[10px] uppercase font-bold tracking-widest opacity-60">Horas</span>
+                    </div>
+                    <div class="countdown-box">
+                        <span id="minutes" class="block text-3xl md:text-5xl font-black text-white">00</span>
+                        <span class="text-[10px] uppercase font-bold tracking-widest opacity-60">Minutos</span>
+                    </div>
+                    <div class="countdown-box">
+                        <span id="seconds" class="block text-3xl md:text-5xl font-black text-white">00</span>
+                        <span class="text-[10px] uppercase font-bold tracking-widest opacity-60">Segundos</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#" class="inline-flex items-center gap-3 bg-brand-teal text-white font-black px-8 py-5 rounded-2xl shadow-2xl hover:scale-105 transition-all transform uppercase tracking-tighter">
+                        <i data-lucide="file-text" class="w-6 h-6"></i> Guia do Participante
+                    </a>
+                    <a href="https://photos.app.goo.gl/ta1hVNJDf4bQgCRu6" target="_blank" class="inline-flex items-center gap-3 bg-brand-yellow text-brand-purple font-black px-8 py-5 rounded-2xl shadow-2xl hover:scale-105 transition-all transform uppercase tracking-tighter">
+                        <i data-lucide="camera" class="w-6 h-6"></i> Álbum de Fotos
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-7xl mx-auto px-4 py-16 space-y-24">
+            
+            <!-- Guia do Participante -->
+            <section id="guia" class="scroll-mt-32">
+                <div class="bg-white p-10 md:p-16 rounded-[3rem] shadow-xl border border-gray-100 flex flex-col md:flex-row items-center gap-10">
+                    <div class="bg-brand-teal/10 p-8 rounded-[2.5rem]">
+                        <i data-lucide="book-open" class="w-20 h-20 text-brand-teal"></i>
+                    </div>
+                    <div class="flex-1 text-center md:text-left space-y-4">
+                        <h2 class="text-4xl font-black text-brand-purple uppercase tracking-tight">Guia do Participante</h2>
+                        <p class="text-lg text-gray-600 font-medium leading-relaxed">
+                            Preparamos um guia completo com todas as orientações, horários, contatos e informações essenciais para que você aproveite ao máximo o nosso 5º Encontro.
+                        </p>
+                        <a href="#" class="inline-flex items-center gap-2 text-brand-teal font-black text-lg hover:underline transition-all uppercase">
+                            Clique aqui para ler o guia <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Menu de Acesso ao Ensalamento (HUB) -->
+            <section id="ensalamento" class="scroll-mt-32">
+                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <button onclick="showView('oficinas')" class="group bg-white p-10 rounded-[3rem] shadow-xl border-b-8 border-brand-purple text-left hover:scale-[1.02] transition-all flex flex-col gap-6">
+                        <div class="bg-brand-purple/10 w-20 h-20 rounded-3xl flex items-center justify-center text-brand-purple group-hover:bg-brand-purple group-hover:text-white transition-colors">
+                            <i data-lucide="layout-grid" class="w-10 h-10"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-black text-brand-purple uppercase">Ensalamento Oficinas</h3>
+                            <p class="text-gray-500 mt-2 font-medium">Consulte sua sala e os docentes responsáveis por cada oficina.</p>
+                        </div>
+                        <span class="inline-flex items-center gap-2 font-black text-brand-purple uppercase text-sm mt-4">
+                            Acessar Lista <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </span>
+                    </button>
+
+                    <button onclick="showView('boas-praticas')" class="group bg-white p-10 rounded-[3rem] shadow-xl border-b-8 border-brand-pink text-left hover:scale-[1.02] transition-all flex flex-col gap-6">
+                        <div class="bg-brand-pink/10 w-20 h-20 rounded-3xl flex items-center justify-center text-brand-pink group-hover:bg-brand-pink group-hover:text-white transition-colors">
+                            <i data-lucide="star" class="w-10 h-10"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-black text-brand-pink uppercase">Boas Práticas</h3>
+                            <p class="text-gray-500 mt-2 font-medium">Veja o cronograma de apresentações e os temas selecionados.</p>
+                        </div>
+                        <span class="inline-flex items-center gap-2 font-black text-brand-pink uppercase text-sm mt-4">
+                            Acessar Lista <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Local -->
+            <section id="local" class="scroll-mt-32 space-y-12">
+                <div class="text-center space-y-4">
+                    <h2 class="text-5xl font-black text-gray-900 tracking-tight uppercase">Local</h2>
+                    <div class="h-2 w-24 bg-brand-pink mx-auto rounded-full"></div>
+                </div>
+
+                <div class="bg-white rounded-[3rem] shadow-2xl overflow-hidden border border-gray-100 grid md:grid-cols-2">
+                    <div class="p-12 flex flex-col justify-center bg-brand-purple text-white">
+                        <h3 class="text-3xl font-black mb-8 flex items-center gap-3 text-brand-yellow uppercase">
+                            <i data-lucide="map-pinned"></i> LOCALIZAÇÃO
+                        </h3>
+                        <div class="space-y-6 text-lg">
+                            <p class="font-black text-2xl uppercase tracking-tighter">Rafain Palace Hotel & Convention</p>
+                            <p class="opacity-80 uppercase leading-relaxed">Av. Olímpio Rafagnin, 2357 - Foz do Iguaçu - PR</p>
+                            <p class="font-bold text-brand-yellow flex items-center gap-2">
+                                <i data-lucide="phone-call" class="w-5 h-5"></i> (45) 3520-9494
+                            </p>
+                        </div>
+                        <div class="mt-12">
+                            <a href="https://www.google.com/maps/dir//Rafain+Palace+Hotel+%26+Convention" target="_blank" class="inline-flex items-center gap-3 bg-brand-pink text-white px-10 py-5 rounded-2xl font-black hover:scale-105 transition-all uppercase tracking-tighter shadow-xl">
+                                <i data-lucide="navigation"></i> VER NO MAPA
+                            </a>
+                        </div>
+                    </div>
+                    <div class="h-[500px] w-full bg-slate-200">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3600.97010487042!2d-54.55133642371946!3d-25.506031735165588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94f6904f47547511%3A0xc3457193b2a30b0!2sRafain%20Palace%20Hotel%20%26%20Convention!5e0!3m2!1spt-BR!2sbr!4v1714480000000!5m2!1spt-BR!2sbr" 
+                            class="w-full h-full border-0" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Cronograma -->
+            <section id="cronograma" class="space-y-12 scroll-mt-24">
+                <h2 class="text-4xl font-black text-gray-900 tracking-tight text-center uppercase">Cronograma Geral</h2>
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <div class="bg-white rounded-[2.5rem] shadow-lg border-t-8 border-brand-teal p-8 card-hover">
+                        <h3 class="text-2xl font-black text-brand-teal mb-6 uppercase">12/05</h3>
+                        <div class="space-y-4 text-sm text-gray-700">
+                            <div class="flex gap-3"><span class="font-bold text-brand-teal">15:50 – 17:50</span><p class="uppercase">Credenciamento</p></div>
+                            <div class="flex gap-3"><span class="font-bold text-brand-teal">18:00 – 20:00</span><p class="uppercase">Solenidade de Abertura</p></div>
+                            <div class="flex gap-3"><span class="font-bold text-brand-teal">20:00 – 22:00</span><p class="italic uppercase">Jantar</p></div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-[2.5rem] shadow-xl border-t-8 border-brand-purple p-8 md:scale-105 z-10 card-hover">
+                        <h3 class="text-2xl font-black text-brand-purple mb-6 uppercase">13/05</h3>
+                        <div class="space-y-4 text-sm text-gray-700">
+                            <div class="flex gap-3"><span class="font-bold text-brand-purple">08:00 – 09:00</span><p class="font-bold uppercase">Momento IntegrAÇÃO</p></div>
+                            <div class="flex gap-3"><span class="font-bold text-brand-purple">09:00 – 12:00</span><p class="font-black uppercase">Hackathon</p></div>
+                            <div class="flex gap-3"><span class="font-bold text-brand-pink">12:00 – 13:30</span><p class="italic font-bold uppercase text-brand-pink">Almoço</p></div>
+                            <div class="flex gap-3"><span class="font-bold text-brand-purple">13:30 – 15:30</span><p class="font-bold uppercase">Oficina 1</p></div>
+                            <div class="flex gap-3"><span class="font-bold text-brand-pink">15:30 – 15:50</span><p class="italic font-bold uppercase text-brand-pink">Coffee Break</p></div>
+                            <div class="flex gap-3"><span class="font-bold text-brand-purple">15:50 – 17:50</span><p class="font-bold uppercase">Oficina 2</p></div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-[2.5rem] shadow-lg border-t-8 border-brand-pink p-8 card-hover">
+                        <h3 class="text-2xl font-black text-brand-pink mb-6 uppercase">14/05</h3>
+                        <div class="space-y-4 text-sm text-gray-700">
+                            <div class="flex gap-3"><span class="font-bold text-brand-pink">08:30 – 11:00</span><p class="uppercase">Boas Práticas do Formador</p></div>
+                            <div class="flex gap-3"><span class="font-bold text-brand-pink">11:00 – 12:00</span><p class="uppercase">Palestra de Encerramento</p></div>
+                            <div class="flex gap-3"><span class="font-bold text-brand-pink">12:00 – 13:30</span><p class="italic font-bold uppercase text-brand-pink">Almoço</p></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Fotos -->
+            <section id="fotos" class="scroll-mt-32">
+                <div class="bg-brand-teal p-12 md:p-20 rounded-[4rem] shadow-2xl text-white text-center space-y-10 relative overflow-hidden">
+                    <div class="absolute inset-0 flex items-center justify-center opacity-5"><i data-lucide="aperture" class="w-[500px] h-[500px]"></i></div>
+                    <div class="relative z-10 space-y-6">
+                        <div class="bg-white/20 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8"><i data-lucide="images" class="w-12 h-12"></i></div>
+                        <h2 class="text-5xl font-black uppercase tracking-tighter">Álbum de Memórias</h2>
+                        <p class="text-xl opacity-90 max-w-2xl mx-auto italic font-medium">Reviva os melhores momentos do nosso encontro!</p>
+                        <div class="pt-8">
+                            <a href="https://photos.app.goo.gl/ta1hVNJDf4bQgCRu6" target="_blank" class="inline-block bg-brand-yellow text-brand-purple font-black text-2xl px-16 py-8 rounded-3xl shadow-2xl hover:scale-105 transition-all transform uppercase tracking-widest">ACESSAR ÁLBUM</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- VIEW: ENSALAMENTO OFICINAS -->
+    <div id="view-oficinas" class="hidden view-transition pt-10 pb-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
+                <div class="flex items-center gap-4">
+                    <button onclick="showView('home')" class="bg-white p-3 rounded-2xl shadow-md text-brand-purple hover:bg-brand-purple hover:text-white transition-all">
+                        <i data-lucide="arrow-left"></i>
+                    </button>
+                    <h2 class="text-4xl md:text-5xl font-black text-brand-purple uppercase tracking-tight">Oficinas</h2>
+                </div>
+                <button onclick="showView('home')" class="bg-brand-teal text-white px-8 py-3 rounded-xl font-black uppercase text-sm shadow-lg hover:scale-105 transition-all">
+                    Voltar ao Início
+                </button>
+            </div>
+            <div id="grade-oficinas" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Gerado por JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEW: BOAS PRÁTICAS -->
+    <div id="view-boas-praticas" class="hidden view-transition pt-10 pb-20">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-6">
+                <div class="flex items-center gap-4">
+                    <button onclick="showView('home')" class="bg-white p-3 rounded-2xl shadow-md text-brand-pink hover:bg-brand-pink hover:text-white transition-all">
+                        <i data-lucide="arrow-left"></i>
+                    </button>
+                    <h2 class="text-4xl md:text-5xl font-black text-brand-pink uppercase tracking-tight">Boas Práticas</h2>
+                </div>
+                <button onclick="showView('home')" class="bg-brand-teal text-white px-8 py-3 rounded-xl font-black uppercase text-sm shadow-lg hover:scale-105 transition-all">
+                    Voltar ao Início
+                </button>
+            </div>
+            <div id="grade-boas-praticas" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Gerado por JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Participantes -->
+    <div id="modal-participantes" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 bg-black/70 backdrop-blur-md">
+        <div class="bg-white w-full max-w-2xl rounded-[3rem] shadow-2xl overflow-hidden flex flex-col max-h-[85vh]">
+            <div id="modal-header" class="bg-brand-purple p-8 text-white flex justify-between items-center">
+                <div>
+                    <h4 id="modal-titulo" class="text-2xl font-black uppercase tracking-tight">SALA 01</h4>
+                    <p class="text-brand-yellow font-bold text-sm uppercase tracking-widest">Lista Oficial de Participantes</p>
+                </div>
+                <button onclick="fecharModal()" class="bg-white/20 hover:bg-white/40 p-3 rounded-full transition-all">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div class="p-8 overflow-y-auto flex-1">
+                <div id="lista-nomes" class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-gray-700 font-medium uppercase text-sm"></div>
+            </div>
+            <div class="p-6 bg-gray-50 border-t border-gray-100 text-center">
+                <button onclick="fecharModal()" class="bg-brand-purple text-white px-12 py-4 rounded-xl font-black uppercase tracking-widest text-sm shadow-lg">FECHAR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="bg-white py-20 border-t border-gray-100 text-center">
+        <div class="max-w-4xl mx-auto space-y-6 px-4">
+            <p class="text-2xl italic font-black text-brand-purple leading-tight">"Formadores em Ação, te ajudando a pensar fora da caixa."</p>
+            <div class="h-1.5 w-24 bg-brand-teal mx-auto rounded-full"></div>
+            <p class="font-black text-lg uppercase tracking-widest text-gray-400">Núcleo Formadores em Ação - SEED/PR</p>
+        </div>
+    </footer>
+
+    <!-- Script de Lógica -->
+    <script>
+        const DADOS_OFICINAS = [
+            { numero: "01 – MATEMÁTICA", equipe: "Laranja", corHeader: "border-orange-500", temas: ["MATEMÁTICA EM", "MATEMÁTICA EF", "RECOMPOSIÇÃO 6º ANO", "RECOMPOSIÇÃO 9º ANO", "RECOMPOSIÇÃO 3ª SÉRIE", "Educação Financeira"], docentes: ["FABIANO SANTOS FERRAZZA", "CAROLINE CARDOSO", "EMANUELLE MARTINS", "DEBORAH BRAGA EITELWEIN", "HILMAR XAVIER DE OLIVEIRA JUNIOR"], participantes: ["ADRIANE DE CASTRO", "ANA PAULA NAHIRNE", "ANAGELA CRISTINA MORETE FELIX", "ANDRESSA RIBEIRO DA COSTA", "ARIADNE CATENACI DE LIMA", "BRUNA SPINARDI", "CARLOS HENRIQUE TAVARES", "CAROLINE CARDOSO", "CELSO MARCZAL", "CESAR FREDERICO CONFORTIN", "CIELI CRISTINA WOITKIV", "CLARA FABER FERNANDES ROTIROTI", "CLARISSE LOURENCO", "CLAUDIA LETICIA CLAUDINO", "CLAUDIA MARIA ALVES", "CRISTIANE BIANCHI CORDEIRO ROSA PINTO", "CRISTINA KOZAN DE BRITO", "DANIELA HARMUCH", "DEBORAH BRAGA EITELWEIN", "DEISE CRISTIANE DE OLIVEIRA", "DIANI CRISTINA GOERGEN BIAZUSSI", "DIJALMARY MATOS PRATES CHAS", "DOUGHERTHY PORTELA DE OLIVEIRA SILVA", "EDINILSON SALATESKI", "EDUARDO DOS SANTOS ZDEPSKI", "ELCIO LUIS VITALLI", "EMANUELLE MARTINS", "FABIA CRUZ MACHADO", "FABIA MELISSA SIQUEIRA", "FABIANA CRISTINA CAETANO", "FABIANO SANTOS FERRAZZA", "FERNANDA MEREDYK", "GISELE ADRIANO", "GISELI SANGUINO", "GISLAINE GERALDA HENDERIKX", "GRAZIELLA CASTELLINI DA COSTA", "HILMAR XAVIER DE OLIVEIRA JUNIOR", "IDALCI DE AZEREDO COUTINHO", "JEZIELY DE CASSIA DA SILVA FONSECA", "JOSEMAR SANTI", "JOSIANE FRANKE GOETZ", "JULIANA SOARES SELLA DE GODOY BUENO", "JULIANE MARIA CHESSIN", "LINOEL BATISTA LANHOSO", "LUANA KWIATKOWSKI VIGANO", "LUCIANE TERESINHA NENEVE", "LUDEMILA REGINA PICCIRILO", "MARCELA DE OLIVEIRA", "MARCELA VANESSA DA COSTA CAMPOS", "MARCELO DE ASSUNCAO", "MARCELO MEDEIROS", "MARIANE AURELIA DA ROCHA", "MARICLEUSA INGLES DA SILVA GOMES", "MARIZA ROTH", "MAYCON DOS SANTOS FRAGA", "MONICA ALVES DA SILVA", "MONICA SANTANA CRUZ RODRIGUES", "NEIVA ROSA", "NILTON CESAR GARCIA SALGUEIRO", "PATRICIA ALBANI", "PATRICIA MONTEIRO BARBOSA", "PAULO WESLEI ALBERTON", "POLYANNA DE ARAUJO GALDINO", "RAFAELA AUGUSTA DE SOUZA NEVES", "RAQUEL DA FONSECA", "RENATA ANDRESSA COSTA DA SILVA", "RITA KARINA DE OLIVEIRA", "ROBERTO APARECIDO DE GOES", "ROSITA APARECIDA BUENO", "SHEYLA PRISCILA DOS SANTOS LOBEIRO", "SILVANA SAR ACACIO", "SILVIA VALESKI", "SIMONE MARIA BALESTRIN QUEIROZ", "SIMONE NERES FIGUEREDO", "SONIA ORACILIO DUARTE"] },
+            { numero: "02 – LÍNGUA PORTUGUESA", equipe: "Turquesa", corHeader: "border-cyan-400", temas: ["PLATAFORMA REDAÇÃO E LEITURA", "RECOMPOSIÇÃO 6º ANO", "RECOMPOSIÇÃO 9º ANO", "RECOMPOSIÇÃO 3ª SÉRIE", "LÍNGUA PORTUGUESA EF", "LÍNGUA PORTUGUESA EM"], docentes: ["MARINA SIQUEIRA PERSEGONA SCHUHLI", "DAIANA BUENO CORDEIRO MAZUR", "ANA PAULA ISTSCHUK", "ADRIELE LESKI KRAJ", "DINÁ DE OLIVEIRA LIPSKI"], participantes: ["ADRIANA APARECIDA SASSE", "ADRIANE CHERPINSKI KOCH", "ADRIELE LESKI KRAJ", "ALINE CRISTINA FERNANDES", "AMAURI DE LIMA", "ANA CLAUDIA COSTA FONTANA", "ANA PAULA ISTSCHUK", "ANDREA IGNASZEWSKI CYMBALISTA", "ANDREIA DE PAULA MOURA", "ANDREIA JAQUELINE BACH", "ANTONIO DE ARAUJO", "CLEBERSON ODAIR LEONHARDT", "CLEVERSON LUCAS DOS SANTOS", "CONSUELO REGINA ALONSO", "CRISTINA HINTERLANG E SILVA", "DAIANA BUENO CORDEIRO MAZUR", "DAIANE MARIA PAGNONCELLI GUARDA", "DANIELA HUBNER MUNHOZ", "DANIELLE CONDE MENDES", "DAVID DE SOUSA OLIVEIRA", "DINA DE OLIVEIRA LIPSKI", "EDEMUNDO GLIENKE", "EDIMARA KLAINE STELLA", "ELAINE CRISTINA PINHEIRO FAVERZANI", "ELIANA APARECIDA DA SILVA GAVA", "ELIANE LUIZA DE AGUIAR FRANCISCHINI", "ELIETE MARIA DE SA", "FABIANA DE LOURDES DOS SANTOS", "FERNANDA DE FATIMA ARAUJO", "FERNANDA KHALIL", "GISELE FERNANDA FORNAZZA VENTURINO GARCIA", "GISLENE AZEVEDO SESTITO", "IARA MIKAL HOLLAND OLIZAROSKI", "ILSE REZLER", "JAQUELINE APARECIDA DOS SANTOS DUTRA", "JAQUELINE CORDEIRO BERNARDO PICONE", "JOAO PEDRO DA SILVEIRA", "JOICE BERNASKI", "JUNIOR SERGIO BARD", "LEANDRO TAFURI", "LEILA APARECIDA KELLER MEI", "LENICE ALVES DA SILVA STENCEL", "LIARA ALBERTONI", "LILIAN MAIA BORGES TESTA", "LILIANE IEDA DRESCH TOMASI", "LUCIANA NASCIMENTO", "LUIS ALBERTO DE SOUZA SANTOS", "MARINA SIQUEIRA PERSEGONA SCHUHLI", "MARION CRISTINE WENTZ DE SOUZA", "MARISTELA MACIAS NOGUEIRA", "MARTA MARIA VILELA", "MAYARA FERREIRA DE OLIVEIRA", "NUBIANE KAILER DOS SANTOS COELHO", "PAMELA DA SILVA CAMOCARDI", "PATRICIA LOCH RAMALHO", "POLIANA DOS SANTOS SILVA DE LAZARI", "PRISCILA JULIANA RUIZ LIMA", "RAFAELLA SALVINI", "ROSELY SILVA DA LUZ", "ROSEMARY TEREZINHA PACHELI BRUSCHZ", "ROSEMEYRE FLORIANO CARVALHO DUARTE", "ROSILANE BECK BENSI", "ROSIVANER DE MELLO CALVO", "SERGIO DE ANDRADE", "SHIRLEI PEREIRA DOS SANTOS MUNHOZ", "SILVANA CATTELAN", "SIMONE APARECIDA MACHADO MIRA", "TATIANI TERESINHA GALVAN COSTA", "VANESSA SOCIO DE ASSIS", "VANIA MARIA CENCI STEDILE", "VIVIANE BARBOSA DE SOUZA", "VIVIANE PATRICIA VALENGA", "WIRGINIA PORTELA BARBOSA DA SILVA"] },
+            { numero: "03 – PROJETO INTEGRADOR", equipe: "Roxa", corHeader: "border-brand-purple", temas: ["PROJETO INTEGRADOR: ECONOMIA E CULTURA PARANAENSE", "INTELIGÊNCIA ARTIFICIAL E TECNOLOGIAS", "LITERATURA E SOCIEDADE", "RESOLUÇÃO DE PROBLEMAS"], docentes: ["ANA PAULA BARBOSA", "ENEGELLY ANTÔNIA PILAR TEBALDI", "BRUNA RECKZIEGEL (ALURA)", "MICHELLE DOS SANTOS (DTI)"], participantes: ["ADILSON FERNANDES DA CRUZ", "ALESSANDRA CARPEN SCHULTZ", "ANA PAULA BARBOSA", "ANA RITA DALLA COSTA", "ANDREA TIEMI KANASHIRO", "ANDREIA CAETANO RODRIGUES", "ANGELA MARIA COTTICA", "ARI DOS SANTOS SILVEIRA PINTO JUNIOR", "BRUNA BANDEIRA DA LUZ", "BRUNA RECKZIEGEL", "CAMILA APARECIDA MACHADO GOMES", "CINTYA BRAZ CORDEL", "CLAUDIA URSULA BOCHANOSKI MARTINHO", "CLEUZA MARIA REICHERT", "DANIELI PORFIRIO PARRA", "DEBORA CRISTINA HOLM", "DENIS DA SILVA CARVALHO", "DENISE EURICH COLATUSSO", "EDSON BUCKO TUFFI", "ENEGELLY ANTONIA PILAR TEBALDI", "ERIKA DE OLIVEIRA SERIAL GELINSKI", "ESTIVERSON FELIPE DE OLIVEIRA", "FABIANA RIBEIRO DE ALMEIRA", "FERNANDA FRANCIELE KRASOTA MACHADO", "FRANCELINE PRISCILA GUSMAO", "FRANCIELLY SPERANDIO DE SOUZA", "GISELE CAVALCANTE MORAIS MILLEO", "GUIDO VALMOR BUSS", "HELIO CLEMENTE FERNANDES", "HILDA MORAIS DO PARAIZO", "INGRID HASS ALVES DE OLIVEIRA", "JANINHA APARECIDA PEREIRA", "JEANE APARECIDA ALVES DE SOUZA", "JEOVANIA FABRO", "JOSANA GOMES RAMOS DA SILVA", "JOSE ROBERTO DE OLIVEIRA", "JOSIANE MACARINI CAVANI", "JOSILENE DE PAIVA KANASHIRO", "JUCILEI APARECIDA BETIM SANTOS", "JULIO WESCESLAU MACOWSKI", "KELLY CARLA PEREZ DA COSTA", "LEA APARECIDA MARINHO DE OLIVEIRA", "LETICIA RISSO CASAGRANDE", "LUIZA APARECIDA CORDEIRO POLAK", "MARCIA CRISTINA NASCIMENTO", "MARCIO JOSE UKOSKI", "MARISETE APARECIDA SPAGNOLLO PRATES", "MARLENE DE MELLO BOLLER", "MAYARA DE GOES BATISTA", "MICHELE PLANTES DE ANDDRADE CAMARGO", "MICHELLE DOS SANTOS", "NEVILDE DE LOURDES GONCALVES DA ROCHA CEZAR", "NICOLLE MONTALVAO PEREIRA", "NOEMI GUEDIN DE ALMEIDA", "NUBIA BRESSAN GUIRALDELI", "PATRICIA DE OLIVEIRA RIBEIRO", "PAULA ALEXANDRA REIS BUENO", "PAULO ROBERTO SCHNEIDER", "POLIANA DE OLIVEIRA BELLON", "SANDRA GORETE GOMES DE OLIVEIRA", "SANDRA MAIRA BOLZON", "SILVANA de FATIMA CARRARA", "SILVIA LEMES DOS SANTOS BONIN", "THAIANE FERREIRA", "VANESSA ELVIRA BONOMETO TENCZNA", "WAGNER DOS SANTOS SOARES"] }
+        ];
+
+        const DADOS_BOAS_PRATICAS = [
+            {
+                numero: "01",
+                corHeader: "border-brand-purple",
+                apresentacoes: [
+                    { eixo: "Gestão da Reunião", professor: "PATRICIA MONTEIRO BARBOSA", materia: "Ed. Financeira", anjo: "ALESSANDRA" },
+                    { eixo: "Liderança e Engajamento", professor: "CLARISSE LOURENCO", materia: "Ed. Financeira", anjo: "ALESSANDRA" },
+                    { eixo: "Organização e Gestão do Tempo", professor: "DOUGHERTHY PORTELA DE OLIVEIRA SILVA", materia: "Mat. 6º ano - Recomposição", anjo: "MICHELLE (CAFF)" }
+                ]
+            },
+            { numero: "02", corHeader: "border-cyan-400", apresentacoes: [] },
+            { numero: "03", corHeader: "border-brand-purple", apresentacoes: [] },
+            { numero: "04", corHeader: "border-emerald-500", apresentacoes: [] },
+            { numero: "05", corHeader: "border-brand-pink", apresentacoes: [] }
+        ];
+
+        window.onload = function() {
+            lucide.createIcons();
+            renderizarOficinas();
+            renderizarBoasPráticas();
+            iniciarCountdown();
+        };
+
+        function showView(viewId) {
+            const homeView = document.getElementById('view-home');
+            const oficinasView = document.getElementById('view-oficinas');
+            const boasPraticasView = document.getElementById('view-boas-praticas');
+
+            // Reset
+            homeView.classList.add('hidden');
+            oficinasView.classList.add('hidden');
+            boasPraticasView.classList.add('hidden');
+
+            if (viewId === 'home') {
+                homeView.classList.remove('hidden');
+            } else if (viewId === 'oficinas') {
+                oficinasView.classList.remove('hidden');
+            } else if (viewId === 'boas-praticas') {
+                boasPraticasView.classList.remove('hidden');
+            }
+            
+            window.scrollTo(0, 0);
+            lucide.createIcons();
+        }
+
+        function scrollToSection(id) {
+            showView('home');
+            setTimeout(() => {
+                const element = document.getElementById(id);
+                if(element) element.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
+        function renderizarOficinas() {
+            const container = document.getElementById('grade-oficinas');
+            if(!container) return;
+            container.innerHTML = DADOS_OFICINAS.map((sala, index) => `
+                <div class="bg-white p-8 rounded-[3rem] shadow-xl border-t-8 ${sala.corHeader} card-hover flex flex-col h-full">
+                    <h3 class="text-2xl font-black text-brand-purple uppercase mb-6 leading-tight">SALA ${sala.numero}</h3>
+                    <div class="flex-1 space-y-6">
+                        <div>
+                            <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">TEMAS</p>
+                            <div class="font-bold text-gray-700 uppercase leading-snug text-sm">
+                                ${sala.temas.map(t => `<p>• ${t}</p>`).join('')}
+                            </div>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">DOCENTES</p>
+                            <div class="font-bold text-brand-purple uppercase leading-snug text-sm">
+                                ${sala.docentes.join('<br>')}
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="abrirModal(${index})" class="mt-8 w-full bg-slate-100 text-gray-600 py-4 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-brand-purple hover:text-white transition-all shadow-sm">
+                        Lista de participantes
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function renderizarBoasPráticas() {
+            const container = document.getElementById('grade-boas-praticas');
+            if(!container) return;
+            container.innerHTML = DADOS_BOAS_PRATICAS.map((sala) => `
+                <div class="bg-white p-8 rounded-[3rem] shadow-xl border-t-8 ${sala.corHeader} card-hover flex flex-col h-full">
+                    <div class="mb-8 flex justify-between items-start">
+                        <div>
+                            <h3 class="text-3xl font-black text-brand-purple uppercase tracking-tighter">SALA ${sala.numero}</h3>
+                            <p class="text-brand-pink font-black uppercase text-xs mt-1">Apresentações</p>
+                        </div>
+                        <div class="bg-brand-purple/10 p-3 rounded-2xl text-brand-purple">
+                            <i data-lucide="mic-2"></i>
+                        </div>
+                    </div>
+
+                    <div class="flex-1 space-y-10 relative">
+                        <div class="absolute left-[15px] top-2 bottom-2 border-l-2 border-dotted border-gray-200"></div>
+
+                        ${sala.apresentacoes.length > 0 ? sala.apresentacoes.map((ap, i) => `
+                            <div class="relative pl-12">
+                                <div class="absolute left-0 top-1 w-8 h-8 bg-brand-purple rounded-full flex items-center justify-center text-white text-[10px] font-black shadow-lg">${i + 1}</div>
+                                <div class="space-y-1">
+                                    <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-tight">${ap.eixo}</p>
+                                    <p class="font-bold text-gray-800 text-lg uppercase leading-tight">${ap.professor}</p>
+                                    <p class="text-sm text-brand-teal font-semibold italic">${ap.materia}</p>
+                                    <div class="mt-2 inline-flex items-center gap-1.5 px-3 py-1 bg-purple-50 text-brand-purple text-[10px] font-black rounded-lg border border-purple-100 uppercase">
+                                        ANJO: ${ap.anjo}
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('') : '<p class="pl-12 italic text-gray-400">Aguardando dados...</p>'}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        const modal = document.getElementById('modal-participantes');
+        const modalTitulo = document.getElementById('modal-titulo');
+        const listaNomes = document.getElementById('lista-nomes');
+
+        function abrirModal(index) {
+            const sala = DADOS_OFICINAS[index];
+            modalTitulo.textContent = `SALA ${sala.numero}`;
+            const nomesOrdenados = [...sala.participantes].sort();
+            listaNomes.innerHTML = nomesOrdenados.map(nome => `<p class="border-b border-gray-50 py-2">${nome}</p>`).join('');
+            modal.classList.add('modal-active');
+            document.body.style.overflow = 'hidden';
+            lucide.createIcons();
+        }
+
+        function fecharModal() {
+            modal.classList.remove('modal-active');
+            document.body.style.overflow = '';
+        }
+
+        // Menu Mobile
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuOverlay = document.getElementById('menu-overlay');
+
+        menuToggle?.addEventListener('click', () => {
+            mobileMenu?.classList.add('mobile-menu-open');
+            menuOverlay?.classList.remove('hidden');
+            setTimeout(() => menuOverlay?.classList.add('opacity-100'), 10);
+        });
+
+        function closeMenu() {
+            mobileMenu?.classList.remove('mobile-menu-open');
+            menuOverlay?.classList.remove('opacity-100');
+            setTimeout(() => menuOverlay?.classList.add('hidden'), 300);
+        }
+
+        menuClose?.addEventListener('click', closeMenu);
+        menuOverlay?.addEventListener('click', closeMenu);
+        document.querySelectorAll('.mobile-link').forEach(link => link.addEventListener('click', closeMenu));
+
+        // Countdown logic
+        function iniciarCountdown() {
+            const eventDate = new Date('May 12, 2026 15:50:00').getTime();
+            setInterval(function() {
+                const now = new Date().getTime();
+                const distance = eventDate - now;
+                if(distance < 0) return;
+
+                const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+                if(document.getElementById("days")) document.getElementById("days").innerHTML = d.toString().padStart(2, '0');
+                if(document.getElementById("hours")) document.getElementById("hours").innerHTML = h.toString().padStart(2, '0');
+                if(document.getElementById("minutes")) document.getElementById("minutes").innerHTML = m.toString().padStart(2, '0');
+                if(document.getElementById("seconds")) document.getElementById("seconds").innerHTML = s.toString().padStart(2, '0');
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
